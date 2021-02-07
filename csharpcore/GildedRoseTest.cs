@@ -67,7 +67,7 @@ namespace csharpcore
 		[Fact]
 		public void ShouldNot_HaveQualityHigherThan50()
 		{
-			var qualityBefore = 50; //ToDo - validate when creating objects if quality is in correct range
+			var qualityBefore = 50; //ToDo - validate when creating objects if quality is in correct range (methods in GildedRose - IncreaseQuality, DecreaseQuality)
 			var items = new List<Item>
 			{
 				new Item

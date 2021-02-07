@@ -2,6 +2,7 @@
 
 namespace csharpcore
 {
+    // ToDo - Make Static?
     public class GildedRose
     {
         IList<Item> Items;
@@ -17,6 +18,7 @@ namespace csharpcore
 
             foreach (var item in Items)
             {
+                // Step 1 - Update Quality
                 if (item.Name != "Aged Brie" && item.Name != "Backstage passes to a TAFKAL80ETC concert")
                 {
 					if (item.Quality > 0 && item.Name != "Sulfuras, Hand of Ragnaros")
@@ -45,11 +47,13 @@ namespace csharpcore
                     }
                 }
 
+                // Step 2 - Reduce Sell In
                 if (item.Name != "Sulfuras, Hand of Ragnaros")
                 {
                     item.SellIn--;
                 }
 
+                // Step 3 - Update quality for Items after Sell By date has passed
                 if (item.SellIn < 0)
                 {
                     if (item.Name != "Aged Brie")
