@@ -12,6 +12,9 @@ namespace csharpcore
 
         public void UpdateQuality()
         {
+            //ToDo - reread requirements
+            //ToDo - add Conjured items
+
             for (var i = 0; i < Items.Count; i++)
             {
                 if (Items[i].Name != "Aged Brie" && Items[i].Name != "Backstage passes to a TAFKAL80ETC concert")
