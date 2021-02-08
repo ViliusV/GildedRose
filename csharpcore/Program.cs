@@ -7,6 +7,7 @@ namespace csharpcore
     {
         public static void Main(string[] args)
         {
+            // ToDo: refactor this file too
             Console.WriteLine("OMGHAI!");
 
             IList<Item> Items = new List<Item>{

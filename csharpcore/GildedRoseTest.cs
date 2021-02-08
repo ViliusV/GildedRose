@@ -34,14 +34,14 @@ namespace csharpcore
 				{
 					Name = "Dummy generic item",
 					SellIn = 5,
-					Quality = 0
+					Quality = Constants.QualityMinimumValue
 				}
 			};
 			var app = new GildedRose(items);
 
 			app.UpdateQuality();
 
-			Assert.True(items[0].Quality >= 0);
+			Assert.True(items[0].Quality >= Constants.QualityMinimumValue);
 		}
 
 		[Fact]
@@ -65,9 +65,9 @@ namespace csharpcore
 		}
 
 		[Fact]
-		public void ShouldNot_HaveQualityHigherThan50()
+		public void ShouldNot_HaveQualityHigherThanMaximumValue()
 		{
-			var qualityBefore = 50; //ToDo - validate when creating objects if quality is in correct range (methods in GildedRose - IncreaseQuality, DecreaseQuality)
+			var qualityBefore = Constants.QualityMaximumValue; //ToDo - validate when creating objects if quality is in correct range (methods in GildedRose - IncreaseQuality, DecreaseQuality)
 			var items = new List<Item>
 			{
 				new Item
@@ -81,7 +81,7 @@ namespace csharpcore
 
 			app.UpdateQuality();
 
-			Assert.True(items[0].Quality <= 50); // ToDo - Move 50, 0 to consts
+			Assert.True(items[0].Quality <= Constants.QualityMaximumValue);
 		}
 		[Fact]
 		public void ShouldNot_BeSold_When_ItemIsSulfuras()
@@ -211,7 +211,7 @@ namespace csharpcore
 
 			app.UpdateQuality();
 
-			Assert.Equal(0, items[0].Quality);
+			Assert.Equal(Constants.QualityMinimumValue, items[0].Quality);
 		}
 	}
 }
