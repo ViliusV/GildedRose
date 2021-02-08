@@ -16,31 +16,33 @@ namespace csharpcore
 		{
 			//ToDo - reread requirements
 			//ToDo - add Conjured items
-			//ToDo - Ideas : Switch, ChangeQuality(item, changeBy) methods, write methods (E.g., change SellIn) 
+			//ToDo - Ideas : Switch, write methods (E.g., change SellIn) 
 
 			foreach (var item in Items)
 			{
 				// Step 1 - Update Quality
-				//ToDo: avoid having || or &&
-				if (item.Name == "Aged Brie" || item.Name == "Backstage passes to a TAFKAL80ETC concert")
+				if (item.Name == "Aged Brie")
 				{
-					UpdateQuality(item, 1);
-
-					if (item.Name == "Backstage passes to a TAFKAL80ETC concert")
+					ChangeQuality(item, 1);
+				}
+				else if (item.Name == "Backstage passes to a TAFKAL80ETC concert")
+				{
+					if (item.SellIn <= 5)
 					{
-						if (item.SellIn <= 5)
-						{
-							UpdateQuality(item, 2);	
-						} 
-						else if (item.SellIn <= 10)
-						{
-							UpdateQuality(item, 1);
-						}
+						ChangeQuality(item, 3);
+					}
+					else if (item.SellIn <= 10)
+					{
+						ChangeQuality(item, 2);
+					}
+					else
+					{
+						ChangeQuality(item, 1);
 					}
 				}
 				else if (item.Name != "Sulfuras, Hand of Ragnaros")
 				{
-					UpdateQuality(item, -1);
+					ChangeQuality(item, -1);
 				}
 				
 				// Step 2 - Reduce Sell In
@@ -54,22 +56,22 @@ namespace csharpcore
 				{
 					if (item.Name == "Aged Brie")
 					{
-						UpdateQuality(item, 1);	
+						ChangeQuality(item, 1);	
 					}
-					// ToDo: Rewrite with If (==) Maybe this is not needed - item.Name != "Sulfuras, Hand of Ragnaros" - as its sellin does not decrease
-					else if (item.Name != "Backstage passes to a TAFKAL80ETC concert" && item.Name != "Sulfuras, Hand of Ragnaros")
-					{
-						UpdateQuality(item, -1);
-					}
-					else
+					
+					else if (item.Name == "Backstage passes to a TAFKAL80ETC concert")
 					{
 						item.Quality = Constants.QualityMinimumValue;
+					}
+					else if (item.Name != "Sulfuras, Hand of Ragnaros") // ToDo: 99% this condition is not needed - as its sellin does not decrease
+					{
+						ChangeQuality(item, -1);
 					}
 				}
 			}
 		}
 
-		private void UpdateQuality(Item item, int changeBy) 
+		private void ChangeQuality(Item item, int changeBy) 
 		{
 			var newQuality = item.Quality + changeBy;
 			newQuality = Math.Max(newQuality, Constants.QualityMinimumValue);	// Making sure new Quality value is >= minimum value
