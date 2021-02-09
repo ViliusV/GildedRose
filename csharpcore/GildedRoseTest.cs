@@ -219,18 +219,40 @@ namespace csharpcore
 		public void Should_DecreaseQualityFourTimesAsFast_When_ItemIsConjured_And_SellInHasPassed()
 		{
 			var qualityBefore = 10;
-			var qualityAfter = 6;
+			var items = new List<Item>
+			{
+				new Item
+				{
+					Name = ItemName.ConjuredManaCake,
+					SellIn = -5,
+					Quality = qualityBefore
+				}
+			};
+			var app = new GildedRose(items);
 
-			Assert.Equal(-4, qualityAfter - qualityBefore);
+			app.UpdateQuality();
+
+			Assert.Equal(-4, items[0].Quality - qualityBefore);
 		}
 
 		[Fact]
 		public void Should_DecreaseQualityTwiceAsFast_When_ItemIsConjured_And_SellInHasNotPassed()
 		{
 			var qualityBefore = 10;
-			var qualityAfter = 8;
+			var items = new List<Item>
+			{
+				new Item
+				{
+					Name = ItemName.ConjuredManaCake,
+					SellIn = 5,
+					Quality = qualityBefore
+				}
+			};
+			var app = new GildedRose(items);
 
-			Assert.Equal(-2, qualityAfter - qualityBefore);
+			app.UpdateQuality();
+
+			Assert.Equal(-2, items[0].Quality - qualityBefore);
 		}
 	}
 }
