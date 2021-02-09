@@ -140,7 +140,7 @@ namespace csharpcore
 
 			app.UpdateQuality();
 
-			Assert.True(items[0].Quality > qualityBefore);
+			Assert.Equal(1, items[0].Quality - qualityBefore);
 		}
 
 		[Theory]

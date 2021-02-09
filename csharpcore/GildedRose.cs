@@ -14,70 +14,46 @@ namespace csharpcore
 
 		public void UpdateQuality()
 		{
-			//ToDo - reread requirements
 			//ToDo - add Conjured items
-			//ToDo - Ideas : Switch, write methods (E.g., change SellIn) 
-
 			foreach (var item in Items)
 			{
-				// Step 1 - Update Quality
-				if (item.Name == "Aged Brie")
+				// Step 1 - Change Quality
+				item.Quality = (item.Name, item.SellIn) switch
 				{
-					ChangeQuality(item, 1);
-				}
-				else if (item.Name == "Backstage passes to a TAFKAL80ETC concert")
-				{
-					if (item.SellIn <= 5)
-					{
-						ChangeQuality(item, 3);
-					}
-					else if (item.SellIn <= 10)
-					{
-						ChangeQuality(item, 2);
-					}
-					else
-					{
-						ChangeQuality(item, 1);
-					}
-				}
-				else if (item.Name != "Sulfuras, Hand of Ragnaros")
-				{
-					ChangeQuality(item, -1);
-				}
+					("Aged Brie", _) => ChangeQuality(item.Quality, 1),
+					("Backstage passes to a TAFKAL80ETC concert", <= 5) => ChangeQuality(item.Quality, 3),
+					("Backstage passes to a TAFKAL80ETC concert", <= 10) => ChangeQuality(item.Quality, 2),
+					("Backstage passes to a TAFKAL80ETC concert", _) => ChangeQuality(item.Quality, 1),
+					("Sulfuras, Hand of Ragnaros", _) => item.Quality,
+					(_, _) => ChangeQuality(item.Quality, -1)
+				};
 				
 				// Step 2 - Reduce Sell In
 				if (item.Name != "Sulfuras, Hand of Ragnaros")
 				{
 					item.SellIn--;
-				}
 
-				// Step 3 - Update quality for Items after Sell By date has passed
-				if (item.SellIn < 0)
-				{
-					if (item.Name == "Aged Brie")
+					// Step 3 - Change quality for Items after Sell By date has passed
+					if (item.SellIn < 0)    
 					{
-						ChangeQuality(item, 1);	
-					}
-					
-					else if (item.Name == "Backstage passes to a TAFKAL80ETC concert")
-					{
-						item.Quality = Constants.QualityMinimumValue;
-					}
-					else if (item.Name != "Sulfuras, Hand of Ragnaros") // ToDo: 99% this condition is not needed - as its sellin does not decrease
-					{
-						ChangeQuality(item, -1);
+						item.Quality = item.Name switch
+						{
+							"Aged Brie" => ChangeQuality(item.Quality, 1),
+							"Backstage passes to a TAFKAL80ETC concert" => Constants.QualityMinimumValue,
+							_ => ChangeQuality(item.Quality, -1)
+						};
 					}
 				}
 			}
 		}
 
-		private void ChangeQuality(Item item, int changeBy) 
+		private static int ChangeQuality(int quality, int changeBy) 
 		{
-			var newQuality = item.Quality + changeBy;
+			var newQuality = quality + changeBy;
 			newQuality = Math.Max(newQuality, Constants.QualityMinimumValue);	// Making sure new Quality value is >= minimum value
 			newQuality = Math.Min(newQuality, Constants.QualityMaximumValue);	// Making sure new Quality value is <= maximum value
 
-			item.Quality = newQuality;
+			return newQuality;
 		}
 	}
 }
