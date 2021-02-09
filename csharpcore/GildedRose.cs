@@ -13,6 +13,8 @@ namespace csharpcore
 			this.Items = Items;
 		}
 
+		public IList<Item> GetItems() => Items;
+
 		public void UpdateQuality()
 		{
 			foreach (var item in Items)
@@ -38,7 +40,7 @@ namespace csharpcore
 					{
 						item.Quality = item.Name switch
 						{
-							ItemName.AgedBrie => ChangeQuality(item.Quality, 1),
+							ItemName.AgedBrie => ChangeQuality(item.Quality, 1), // Todo should it increase once more for Aged Brie?
 							ItemName.BackstagePasses => Quality.MinimumValue,
 							_ => ChangeQuality(item.Quality, -1)
 						};
