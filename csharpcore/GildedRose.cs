@@ -4,9 +4,10 @@ using static csharpcore.Constants;
 
 namespace csharpcore
 {
-	// ToDo - Make Static?
 	public class GildedRose
 	{
+		//ToDo - Idea to think about - class per item type with separate update methods (when we have more different types)
+		//ToDo - Idea - merge different pattern matchings
 		IList<Item> Items;
 		public GildedRose(IList<Item> Items)
 		{
@@ -41,7 +42,7 @@ namespace csharpcore
 					{
 						item.Quality = item.Name switch
 						{
-							ItemName.AgedBrie => ChangeQuality(item.Quality, 1), // Todo should it increase once more for Aged Brie?
+							ItemName.AgedBrie => ChangeQuality(item.Quality, 1),
 							ItemName.ConjuredManaCake => ChangeQuality(item.Quality, -2),
 							ItemName.BackstagePasses => Quality.MinimumValue,
 							_ => ChangeQuality(item.Quality, -1)

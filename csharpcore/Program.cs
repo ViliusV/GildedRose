@@ -20,7 +20,6 @@ namespace csharpcore
 				new Item {Name = ItemName.BackstagePasses, SellIn = 15, Quality = 20},
 				new Item {Name = ItemName.BackstagePasses, SellIn = 10, Quality = 49},
 				new Item {Name = ItemName.BackstagePasses, SellIn = 5, Quality = 49},
-				// this conjured item does not work properly yet, //ToDo - add Conjured items
 				new Item {Name = ItemName.ConjuredManaCake, SellIn = 3, Quality = 6}
 			};
 

@@ -68,7 +68,7 @@ namespace csharpcore
 		[Fact]
 		public void ShouldNot_HaveQualityHigherThanMaximumValue()
 		{
-			var qualityBefore = Quality.MaximumValue; //ToDo - validate when creating objects if quality is in correct range (methods in GildedRose - IncreaseQuality, DecreaseQuality)
+			var qualityBefore = Quality.MaximumValue;
 			var items = new List<Item>
 			{
 				new Item
