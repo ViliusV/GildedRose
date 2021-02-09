@@ -1,5 +1,6 @@
 ﻿using Xunit;
 using System.Collections.Generic;
+using static csharpcore.Constants;
 
 namespace csharpcore
 {
@@ -34,14 +35,14 @@ namespace csharpcore
 				{
 					Name = "Dummy generic item",
 					SellIn = 5,
-					Quality = Constants.QualityMinimumValue
+					Quality = Quality.MinimumValue
 				}
 			};
 			var app = new GildedRose(items);
 
 			app.UpdateQuality();
 
-			Assert.True(items[0].Quality >= Constants.QualityMinimumValue);
+			Assert.True(items[0].Quality >= Quality.MinimumValue);
 		}
 
 		[Fact]
@@ -52,7 +53,7 @@ namespace csharpcore
 			{
 				new Item
 				{
-					Name = "Aged Brie",
+					Name = ItemName.AgedBrie,
 					SellIn = 5,
 					Quality = qualityBefore
 				}
@@ -67,12 +68,12 @@ namespace csharpcore
 		[Fact]
 		public void ShouldNot_HaveQualityHigherThanMaximumValue()
 		{
-			var qualityBefore = Constants.QualityMaximumValue; //ToDo - validate when creating objects if quality is in correct range (methods in GildedRose - IncreaseQuality, DecreaseQuality)
+			var qualityBefore = Quality.MaximumValue; //ToDo - validate when creating objects if quality is in correct range (methods in GildedRose - IncreaseQuality, DecreaseQuality)
 			var items = new List<Item>
 			{
 				new Item
 				{
-					Name = "Aged Brie",
+					Name = ItemName.AgedBrie,
 					SellIn = 5,
 					Quality = qualityBefore
 				}
@@ -81,7 +82,7 @@ namespace csharpcore
 
 			app.UpdateQuality();
 
-			Assert.True(items[0].Quality <= Constants.QualityMaximumValue);
+			Assert.True(items[0].Quality <= Quality.MaximumValue);
 		}
 		[Fact]
 		public void ShouldNot_BeSold_When_ItemIsSulfuras()
@@ -91,7 +92,7 @@ namespace csharpcore
 			{
 				new Item
 				{
-					Name = "Sulfuras, Hand of Ragnaros",
+					Name = ItemName.Sulfuras,
 					SellIn = sellInBefore,
 					Quality = 10
 				}
@@ -111,7 +112,7 @@ namespace csharpcore
 			{
 				new Item
 				{
-					Name = "Sulfuras, Hand of Ragnaros",
+					Name = ItemName.Sulfuras,
 					SellIn = 5,
 					Quality = qualityBefore
 				}
@@ -131,7 +132,7 @@ namespace csharpcore
 			{
 				new Item
 				{
-					Name = "Backstage passes to a TAFKAL80ETC concert",
+					Name = ItemName.BackstagePasses,
 					SellIn = 15,
 					Quality = qualityBefore
 				}
@@ -156,7 +157,7 @@ namespace csharpcore
 			{
 				new Item
 				{
-					Name = "Backstage passes to a TAFKAL80ETC concert",
+					Name = ItemName.BackstagePasses,
 					SellIn = sellIn,
 					Quality = qualityBefore
 				}
@@ -181,7 +182,7 @@ namespace csharpcore
 			{
 				new Item
 				{
-					Name = "Backstage passes to a TAFKAL80ETC concert",
+					Name = ItemName.BackstagePasses,
 					SellIn = sellIn,
 					Quality = qualityBefore
 				}
@@ -202,7 +203,7 @@ namespace csharpcore
 			{
 				new Item
 				{
-					Name = "Backstage passes to a TAFKAL80ETC concert",
+					Name = ItemName.BackstagePasses,
 					SellIn = sellIn,
 					Quality = 10
 				}
@@ -211,7 +212,7 @@ namespace csharpcore
 
 			app.UpdateQuality();
 
-			Assert.Equal(Constants.QualityMinimumValue, items[0].Quality);
+			Assert.Equal(Quality.MinimumValue, items[0].Quality);
 		}
 	}
 }
