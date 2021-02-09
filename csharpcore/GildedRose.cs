@@ -26,6 +26,7 @@ namespace csharpcore
 					(ItemName.BackstagePasses, <= 5) => ChangeQuality(item.Quality, 3),
 					(ItemName.BackstagePasses, <= 10) => ChangeQuality(item.Quality, 2),
 					(ItemName.BackstagePasses, _) => ChangeQuality(item.Quality, 1),
+					(ItemName.ConjuredManaCake, _) => ChangeQuality(item.Quality, -2),
 					(ItemName.Sulfuras, _) => item.Quality,
 					(_, _) => ChangeQuality(item.Quality, -1)
 				};
@@ -41,6 +42,7 @@ namespace csharpcore
 						item.Quality = item.Name switch
 						{
 							ItemName.AgedBrie => ChangeQuality(item.Quality, 1), // Todo should it increase once more for Aged Brie?
+							ItemName.ConjuredManaCake => ChangeQuality(item.Quality, -2),
 							ItemName.BackstagePasses => Quality.MinimumValue,
 							_ => ChangeQuality(item.Quality, -1)
 						};
