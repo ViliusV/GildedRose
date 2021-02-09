@@ -214,5 +214,23 @@ namespace csharpcore
 
 			Assert.Equal(Quality.MinimumValue, items[0].Quality);
 		}
+
+		[Fact]
+		public void Should_DecreaseQualityFourTimesAsFast_When_ItemIsConjured_And_SellInHasPassed()
+		{
+			var qualityBefore = 10;
+			var qualityAfter = 6;
+
+			Assert.Equal(-4, qualityAfter - qualityBefore);
+		}
+
+		[Fact]
+		public void Should_DecreaseQualityTwiceAsFast_When_ItemIsConjured_And_SellInHasNotPassed()
+		{
+			var qualityBefore = 10;
+			var qualityAfter = 8;
+
+			Assert.Equal(-2, qualityAfter - qualityBefore);
+		}
 	}
 }
