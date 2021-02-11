@@ -6,8 +6,7 @@ namespace csharpcore
 {
 	public class GildedRose
 	{
-		//ToDo - Idea to think about - class per item type with separate update methods (when we have more different types)
-		//ToDo - Idea - merge different pattern matchings
+		// ToDo - Idea - more OOP oriented approach - class per item type with overriden update methods (when we have more different types)
 		IList<Item> Items;
 		public GildedRose(IList<Item> Items)
 		{
