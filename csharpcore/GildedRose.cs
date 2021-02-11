@@ -22,9 +22,9 @@ namespace csharpcore
 				// Step 1 - Change Quality
 				item.Quality = (item.Name, item.SellIn) switch
 				{
-					(ItemName.AgedBrie, <=0) => ChangeQuality(item.Quality, 2),
+					(ItemName.AgedBrie, <= 0) => ChangeQuality(item.Quality, 2),
 					(ItemName.AgedBrie, _) => ChangeQuality(item.Quality, 1),
-					(ItemName.BackstagePasses, <=0) => Quality.MinimumValue,
+					(ItemName.BackstagePasses, <= 0) => Quality.MinimumValue,
 					(ItemName.BackstagePasses, <= 5) => ChangeQuality(item.Quality, 3),
 					(ItemName.BackstagePasses, <= 10) => ChangeQuality(item.Quality, 2),
 					(ItemName.BackstagePasses, _) => ChangeQuality(item.Quality, 1),
