@@ -66,6 +66,46 @@ namespace csharpcore
 		}
 
 		[Fact]
+		public void Should_IncreaseQualityByOne_When_ItemIsAgedBrie_And_SellInHasNotPassed()
+		{
+			var qualityBefore = 10;
+			var items = new List<Item>
+			{
+				new Item
+				{
+					Name = ItemName.AgedBrie,
+					SellIn = 5,
+					Quality = qualityBefore
+				}
+			};
+			var app = new GildedRose(items);
+
+			app.UpdateQuality();
+
+			Assert.Equal(1, items[0].Quality - qualityBefore);
+		}
+
+		[Fact]
+		public void Should_IncreaseQualityByTwo_When_ItemIsAgedBrie_And_SellInHasPassed()
+		{
+			var qualityBefore = 10;
+			var items = new List<Item>
+			{
+				new Item
+				{
+					Name = ItemName.AgedBrie,
+					SellIn = -5,
+					Quality = qualityBefore
+				}
+			};
+			var app = new GildedRose(items);
+
+			app.UpdateQuality();
+
+			Assert.Equal(2, items[0].Quality - qualityBefore);
+		}
+
+		[Fact]
 		public void ShouldNot_HaveQualityHigherThanMaximumValue()
 		{
 			var qualityBefore = Quality.MaximumValue;

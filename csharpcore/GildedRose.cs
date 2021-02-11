@@ -19,35 +19,27 @@ namespace csharpcore
 		public void UpdateQuality()
 		{
 			foreach (var item in Items)
-			{
+			{	
 				// Step 1 - Change Quality
 				item.Quality = (item.Name, item.SellIn) switch
 				{
+					(ItemName.AgedBrie, <=0) => ChangeQuality(item.Quality, 2),
 					(ItemName.AgedBrie, _) => ChangeQuality(item.Quality, 1),
+					(ItemName.BackstagePasses, <=0) => Quality.MinimumValue,
 					(ItemName.BackstagePasses, <= 5) => ChangeQuality(item.Quality, 3),
 					(ItemName.BackstagePasses, <= 10) => ChangeQuality(item.Quality, 2),
 					(ItemName.BackstagePasses, _) => ChangeQuality(item.Quality, 1),
+					(ItemName.ConjuredManaCake, <= 0) => ChangeQuality(item.Quality, -4),
 					(ItemName.ConjuredManaCake, _) => ChangeQuality(item.Quality, -2),
 					(ItemName.Sulfuras, _) => item.Quality,
+					(_, <= 0) => ChangeQuality(item.Quality, -2),
 					(_, _) => ChangeQuality(item.Quality, -1)
 				};
-				
+
 				// Step 2 - Reduce Sell In
 				if (item.Name != ItemName.Sulfuras)
 				{
 					item.SellIn--;
-
-					// Step 3 - Change quality for Items after Sell By date has passed
-					if (item.SellIn < 0)    
-					{
-						item.Quality = item.Name switch
-						{
-							ItemName.AgedBrie => ChangeQuality(item.Quality, 1),
-							ItemName.ConjuredManaCake => ChangeQuality(item.Quality, -2),
-							ItemName.BackstagePasses => Quality.MinimumValue,
-							_ => ChangeQuality(item.Quality, -1)
-						};
-					}
 				}
 			}
 		}
